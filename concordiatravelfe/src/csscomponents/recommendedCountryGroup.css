@@ -1,0 +1,15 @@
+.card-group{
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 50px;
+}
+
+.card-ac{
+    border-radius: 10px;
+}
+
+.recommend{
+    text-align: center;
+    margin-top: 40px;
+}

@@ -1,0 +1,8 @@
+.hotel-search-Results {
+    display: grid;
+    flex-direction: row;
+    grid-template-columns: 100px 100px 100px;
+    justify-content: space-between;
+    margin-right: 140px;
+    row-gap: 20px;
+}
