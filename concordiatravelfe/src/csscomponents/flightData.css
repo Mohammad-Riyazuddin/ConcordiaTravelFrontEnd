@@ -1,0 +1,33 @@
+.card-ac{
+    width: 828px;
+}
+
+.card-body{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-title{
+    display: inline;
+    margin-right: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.airport{
+    display: inline;
+    font-size: 0.6rem;
+    margin-right: 60px;
+}
+
+.card-subtitle{
+    display: inline-block;
+    margin-right: 80px;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.price{
+    font-size: 1rem;
+    font-weight: bold;
+}

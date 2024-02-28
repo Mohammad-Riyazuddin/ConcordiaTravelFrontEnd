@@ -1,0 +1,41 @@
+.logo {
+    background-image: url('../assets/logo-no-background.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 40px;
+    margin-left: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    float: left;
+}
+
+.navigationBar {
+    margin-left: 450px;
+}
+
+.profile-logo {
+    width: 15px;
+    margin-right: 10px;
+}
+
+.inactive {
+    text-decoration: none;
+    color: #0077b6;
+    font-size: 1.2rem;
+    transition: 0.1s ease-in-out;
+
+    &:hover {
+        color: #023e8a;
+    }
+}
+
+.customNavLink {
+    text-decoration: none;
+    color: blue;
+    font-weight: bold;
+}
+
+.customNavLink:hover {
+    color: rgb(96, 96, 229);
+}

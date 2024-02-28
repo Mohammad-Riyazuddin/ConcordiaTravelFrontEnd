@@ -1,0 +1,23 @@
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.place-price{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.price{
+    margin-top: -4px;
+    margin-bottom: 8px;
+}
+
+.hotel-details-button{
+    margin-top: 5px;
+}
+
+.card-img-top{
+    width: 170px;
+}
