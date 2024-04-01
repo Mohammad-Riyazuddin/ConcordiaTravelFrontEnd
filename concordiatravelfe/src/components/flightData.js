@@ -1,6 +1,7 @@
 import React from "react";
-import { Card, CardBody, CardSubtitle, CardTitle, CardText, Button } from "reactstrap";
+import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
 import '../csscomponents/flightData.css';
+import { Link } from "react-router-dom";
 
 const FlightData = ( { flights }) => {
     return (
@@ -19,7 +20,9 @@ const FlightData = ( { flights }) => {
                     </div>
                     <div className="price-div">
                         <CardText className="price">Price: ${flights.price}</CardText>
-                        <Button size="sm">View Details</Button>
+                        <Link to={`/flightDetails/${flights.id}`} style={{textDecoration: 'none',color: 'white', fontWeight: 'bold'}}>
+                            <Button  size="sm">View Details</Button>
+                        </Link>
                     </div>
                 </CardBody>
             </Card>

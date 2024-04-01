@@ -1,0 +1,40 @@
+.flight-details-card {
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    padding: 1rem;
+    margin-top: 2rem;
+    background-color: #f8f9fa;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.flight-details-card .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.flight-details-card .card-text {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.flight-details-card .card-text p {
+    margin-bottom: 0.5rem;
+}
+
+.flight-details-card .card-text small {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.flight-details-heading{
+    margin-left: 80px;
+}
+
+.flight-name-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-right: 1rem;
+}

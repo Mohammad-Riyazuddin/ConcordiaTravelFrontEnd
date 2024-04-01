@@ -1,5 +1,15 @@
 .flight-search{
     margin-top: 50px;
-    padding-left: 200px;
-    padding-right: 200px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.content-activity{
+    position: absolute;
+    color: white;
+    top: 70px;
+    left:100px; 
+    z-index: 3;
+    text-align: center;
+    right: 120px;
 }
