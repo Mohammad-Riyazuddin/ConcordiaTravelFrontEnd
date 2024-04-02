@@ -11,12 +11,15 @@
 }
 
 .navigationBar {
+    position: relative;
     margin-left: 450px;
 }
 
 .profile-logo {
+    position: relative;
     width: 15px;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .inactive {
@@ -38,4 +41,51 @@
 
 .customNavLink:hover {
     color: rgb(96, 96, 229);
+}
+
+.profile-logo {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dropDownprofile {
+    position: absolute;
+    top: 100%; /* Position the dropdown just below the profile icon */
+    right: 0; /* Align the dropdown to the right of the profile icon */
+    width: 120px; /* Adjust the width as needed */
+    padding: 15px;
+    border-radius: 8px;
+    background-color: white;
+    border: 1px solid gray;
+    cursor: pointer;
+    display: none; /* Initially hidden */
+    z-index: 1000; /* Ensure the dropdown is above other content */
+}
+
+/* Style for the dropdown menu */
+.dropdown-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Style for dropdown menu items */
+.dropdown-menu li {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Hover effect for dropdown menu items */
+.dropdown-menu li:hover {
+    background-color: #f1f1f1;
+}
+
+/* Ensure the dropdown is visible when the profile icon is clicked */
+.profile-logo:hover .dropDownprofile,
+.profile-logo:focus-within .dropDownprofile {
+    display: block;
 }

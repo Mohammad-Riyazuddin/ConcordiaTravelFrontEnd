@@ -1,8 +1,9 @@
 import React from "react";
 import { Card, CardBody, CardImg, CardTitle, CardSubtitle, CardText, Button } from "reactstrap";
 import '../csscomponents/hotelData.css';
+import { Link } from "react-router-dom";
 
-const HotelData = ( { hotels }) => {
+const HotelData = ({ hotels }) => {
     return (
         <div>
             <Card className="card-ac" color="info" style={{ width: '15rem' }} >
@@ -19,9 +20,11 @@ const HotelData = ( { hotels }) => {
                             {hotels.price}$/night
                         </CardText>
                     </div>
-                    <Button className="hotel-details-button" size="sm">
-                        Details
-                    </Button>
+                    <Link to={`/hotelDetails/${hotels.id}`} style={{ textDecoration: 'none', color: 'white', fontWeight: 'bold' }}>
+                        <Button className="hotel-details-button" size="sm">
+                            Details
+                        </Button>
+                    </Link>
                 </CardBody>
             </Card>
         </div>

@@ -1,5 +1,7 @@
 import React from "react";
 import { Card, CardBody, CardImg, CardTitle, CardSubtitle, CardText, Button } from "reactstrap";
+import '../csscomponents/activityData.css';
+import { Link } from "react-router-dom";
 
 const ActivityData = (props) => {
     return (
@@ -18,9 +20,11 @@ const ActivityData = (props) => {
                             {props.activities.price} $/person
                         </CardText>
                     </div>
-                    <Button className="activity-details-button" size="sm">
-                        Details
-                    </Button>
+                    <Link to={`/activityDetails/${props.activities.id}`} style={{textDecoration: 'none',color: 'white', fontWeight: 'bold'}}>
+                        <Button className="activity-details-button" size="sm">
+                            Details
+                        </Button>
+                    </Link>
                 </CardBody>
             </Card>
         </div>

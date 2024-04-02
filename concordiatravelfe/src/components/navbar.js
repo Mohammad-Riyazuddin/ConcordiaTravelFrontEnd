@@ -3,15 +3,18 @@ import {
     Navbar,
     Nav,
     NavItem,
-    NavLink,
     Row,
-    Col
+    Col,
 } from 'reactstrap';
 import '../csscomponents/navbar.css';
 import profileIcon from '../assets/user-solid.svg';
 import { Link } from 'react-router-dom';
+import ProfileDropdown from "../components/profiledropdown";
 
-const Nnavbar = () => {
+const Nnavbar = ({ setIsAuthenticated }) => {
+    const [openProfile, setOpenProfile] = React.useState(false);
+
+    const toggleDropdown = () => setOpenProfile(!openProfile);
 
     return (
         <div>
@@ -22,28 +25,29 @@ const Nnavbar = () => {
                         <Row>
                             <Col>
                                 <NavItem className="nav-item" >
-                                    <Link className="nav-link nav-link-active" style={{textDecoration: 'none', color: 'blue', fontWeight: 'bold'}} to="/">Home</Link>
+                                    <Link className="nav-link nav-link-active" style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bold' }} to="/CustomerHome">Home</Link>
                                 </NavItem>
                             </Col>
                             <Col>
                                 <NavItem className="nav-item">
-                                    <Link className="nav-link nav-link-active" style={{textDecoration: 'none', color: 'blue', fontWeight: 'bold'}} to="/Flights">Flights</Link>
+                                    <Link className="nav-link nav-link-active" style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bold' }} to="/Flights">Flights</Link>
                                 </NavItem>
                             </Col>
                             <Col>
                                 <NavItem className="nav-item">
-                                    <Link className="nav-link nav-link-active" style={{textDecoration: 'none', color: 'blue', fontWeight: 'bold'}} to="/Hotels">Hotels</Link>
+                                    <Link className="nav-link nav-link-active" style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bold' }} to="/Hotels">Hotels</Link>
                                 </NavItem>
                             </Col>
                             <Col>
                                 <NavItem className="nav-item">
-                                    <Link className="nav-link nav-link-active" style={{textDecoration: 'none', color: 'blue', fontWeight: 'bold'}} to="/Activities">Activities</Link>
+                                    <Link className="nav-link nav-link-active" style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bold' }} to="/Activities">Activities</Link>
                                 </NavItem>
                             </Col>
                         </Row>
                     </Nav>
-                    <div className="profile-logo" >
+                    <div className="profile-logo" onClick={toggleDropdown}>
                         <img src={profileIcon} alt="Profile" />
+                        {openProfile && <ProfileDropdown openProfile={openProfile} setOpenProfile={setOpenProfile} setIsAuthenticated={setIsAuthenticated} />}
                     </div>
                 </Navbar>
             </div>

@@ -6,6 +6,7 @@ import '../csscomponents/packagedata.css';
 import { Link } from "react-router-dom";
 
 const PackageData = ( { packages }) => {
+
     return (
         <div>
             <Card className="card-pc" color="info" style={{ width: '17rem' }} >
@@ -23,8 +24,8 @@ const PackageData = ( { packages }) => {
                         </CardText>
                     </div>
                     {/* <Button className="package-details-button" size="sm"> */}
-                        <Link to="/packagedetails" style={{textDecoration: 'none',color: 'white', fontWeight: 'bold'}}>
-                            <Button className="package-details-button" size="sm">Details</Button>
+                        <Link to={`/packageDetails/${packages.id}`} style={{textDecoration: 'none',color: 'white', fontWeight: 'bold'}}>
+                            <Button className="package-details-button" size="sm" >Details</Button>
                         </Link>
                     {/* </Button> */}
                 </CardBody>

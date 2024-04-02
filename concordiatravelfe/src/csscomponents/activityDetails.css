@@ -1,0 +1,39 @@
+.activity-details-card {
+    margin-left: 80px;
+    margin-right: 80px;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    padding: 1rem;
+    background-color: #f8f9fa;
+}
+
+.activity-name-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-right: 1rem;
+}
+
+.activity-details-heading{
+    margin-left: 80px;
+}
+
+.activity-details-card .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.activity-details-card .card-text {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.activity-details-card .card-text p {
+    margin-bottom: 0.5rem;
+}
+
+.activity-details-card .card-text small {
+    font-size: 0.875rem;
+    color: #6c757d;
+}

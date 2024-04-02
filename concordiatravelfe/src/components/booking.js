@@ -1,0 +1,131 @@
+// Booking.js
+import React, { useEffect, useState } from 'react';
+import { Card, CardBody, CardTitle, CardText, Button, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { useLocation } from 'react-router-dom';
+import '../csscomponents/booking.css';
+import base_url from "../api/bootapi";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+const Booking = () => {
+    const location = useLocation();
+    const bookingInfo = location.state;
+    const [numberOfPeople, setNumberOfPeople] = useState(bookingInfo.numberOfPeople || 1);
+    const totalCost = Number(bookingInfo.totalCost) * numberOfPeople;
+    const [errorMessage, setErrorMessage] = useState('');
+    const [bookingType, setBookingType] = useState(null);
+
+    const navigate = useNavigate();
+
+
+    console.log('The bookingInfo is ' + bookingInfo.package_id + ' ' + bookingInfo.hotel + ' ' + bookingInfo.flight + ' ' + bookingInfo.activity);
+
+    const determineBookingType = () => {
+        if (bookingInfo.package_id !== null && bookingInfo.package_id !== undefined) {
+            setBookingType("package");
+        } else if (bookingInfo.hotel !== null && bookingInfo.hotel !== undefined) {
+            setBookingType("hotel");
+        } else if (bookingInfo.flight !== null && bookingInfo.flight !== undefined && bookingInfo.flight !== '') {
+            setBookingType("flight");
+        } else if (bookingInfo.activity !== null && bookingInfo.activity !== undefined) {
+            setBookingType("activity");
+        } else {
+            console.log('No matching conditions found');
+        }
+    };
+
+    // Use useEffect to call determineBookingType whenever bookingInfo changes
+    useEffect(() => {
+        determineBookingType();
+    }, [bookingInfo]);
+    // Function to handle the payment
+    const handlePayment = async () => {
+        try {
+            // Retrieve the token from local storage
+            const token = localStorage.getItem('token');
+            const userId = localStorage.getItem('userid');
+
+            // Define the payload
+            const payload = {
+                bookingCost: totalCost,
+                status: "Booked",
+                user_id: parseInt(userId),
+                package: bookingInfo.package_id,
+            };
+
+            // Define the request headers
+            const headers = {
+                'Authorization': `Token ${token}`,
+                'Content-Type': 'application/json',
+            };
+
+
+
+            // Make the API call
+            const response = await axios.post(`${base_url}/bookings/`, payload, { headers });
+            if (response.status === 201) {
+                // Handle successful payment
+                console.log('The bookingType is ' + bookingType);
+                navigate('/bookingSuccessPage', { state: { bookingType: bookingType} });
+                console.log('Payment successful');
+            } else {
+                // Handle payment failure
+                console.error('Payment failed');
+            }
+            // Handle the response
+            console.log(response.data);
+            // You can redirect the user or show a success message here
+        } catch (error) {
+            // Handle errors
+            console.error(error);
+            // You can show an error message to the user here
+        }
+    };
+
+    return (
+        <div className="booking-container">
+
+            <Card>
+                <CardBody>
+                    <CardTitle tag="h5">Booking Details</CardTitle>
+                    <CardText>
+                        <strong>Hotel:</strong> {bookingInfo.hotel}
+                    </CardText>
+                    <CardText>
+                        <strong>Flight:</strong> {bookingInfo.flight}
+                    </CardText>
+                    <CardText>
+                        <strong>Activities:</strong> {bookingInfo.activities}
+                    </CardText>
+                    <FormGroup className="form-inline">
+                        <Label for="numberOfPeople">Number of People</Label>
+                        <Input
+                            type="number"
+                            min="1"
+                            id="numberOfPeople"
+                            value={numberOfPeople}
+                            onChange={(e) => {
+                                const value = e.target.value;
+                                if (value < 1) {
+                                    setErrorMessage('Number of people must be at least 1.');
+                                } else {
+                                    setErrorMessage('');
+                                }
+                                setNumberOfPeople(value);
+                            }}
+                        />
+                        {errorMessage && <FormText color="danger">{errorMessage}</FormText>}
+                    </FormGroup>
+                    <CardText>
+                        <strong>Total Cost:</strong> ${totalCost.toFixed(2)}
+                    </CardText>
+                    <Button color="primary" onClick={handlePayment}>Make Payment</Button>
+                </CardBody>
+            </Card>
+        </div>
+
+
+    );
+};
+
+export default Booking;

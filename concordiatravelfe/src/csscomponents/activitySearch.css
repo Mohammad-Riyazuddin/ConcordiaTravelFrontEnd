@@ -3,3 +3,13 @@
     padding-left: 200px;
     padding-right: 200px;
 }
+
+.content-activity{
+    position: absolute;
+    color: white;
+    top: 70px;
+    left:100px; 
+    z-index: 3;
+    text-align: center;
+    right: 120px;
+}

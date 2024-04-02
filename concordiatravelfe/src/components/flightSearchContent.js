@@ -30,11 +30,14 @@ const FlightSearchContent = () => {
 
     return (
         <div>
+            <h4 style={{marginLeft: "200px", marginTop: "50px"}} className="featured-packages">Available Flights</h4>
+            <div style={{marginLeft: "195px"}}>
             {
                 flightData.length > 0 
                 ? flightData.map((flight) => <FlightData flights={flight} />)
                 : <p>No flights found</p>
             }
+            </div>
         </div>
     );
 }
