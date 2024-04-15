@@ -59,8 +59,7 @@ const Booking = () => {
                 'Content-Type': 'application/json',
             };
 
-
-
+            
             // Make the API call
             const response = await axios.post(`${base_url}/bookings/`, payload, { headers });
             if (response.status === 201) {

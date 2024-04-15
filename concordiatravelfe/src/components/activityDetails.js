@@ -4,10 +4,13 @@ import '../csscomponents/activityDetails.css';
 import { useParams } from 'react-router-dom';
 import base_url from "../api/bootapi";
 import axios from 'axios'; // Import Axios
+import { useNavigate } from 'react-router-dom';
 
 const ActivityDetails = () => {
     const [activityDetails, setActivityDetails] = useState(null);
     const { id } = useParams();
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchActivityDetails = async () => {
@@ -23,6 +26,15 @@ const ActivityDetails = () => {
             fetchActivityDetails();
         }
     }, [id]);
+
+
+    const handleActivityBookNow = () => {
+        const bookingInfo = {
+            activity : activityDetails? activityDetails.name : 'No activity in this package',
+            totalCost : Number(activityDetails.price)
+        };
+        navigate('/book', { state: bookingInfo });
+    };
 
 
     if (!activityDetails) {
@@ -44,7 +56,7 @@ const ActivityDetails = () => {
                         <CardTitle tag="h5">
                             {activityDetails.name}
                         </CardTitle>
-                        <Button color="primary">Book Now</Button>
+                        <Button color="primary" onClick={handleActivityBookNow}>Book Now</Button>
                     </div>
                     <CardText>
                         <p>Description: {activityDetails.description}</p>

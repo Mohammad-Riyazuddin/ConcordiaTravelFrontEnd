@@ -6,7 +6,7 @@ import base_url from "../api/bootapi";
 
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({ onLoginSuccess}) => {
+const Login = ({ onLoginSuccess }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -22,15 +22,17 @@ const Login = ({ onLoginSuccess}) => {
                 console.log('Login successful:', response.data);
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('userid', response.data.userId);
+                localStorage.setItem('isStaff', response.data.isStaff);
                 onLoginSuccess();
-                navigate('/CustomerHome'); 
+                if(localStorage.getItem('isStaff') === 'true'){
+                    navigate('/AgentHome');
+                } else{
+                    navigate('/CustomerHome');
+                }
             } else {
                 // Handle login failure
                 console.error('Login failed:', response.data);
             }
-
-            // Handle successful login (e.g., redirect to a dashboard)
-            console.log('Login successful:', response.data);
         } catch (error) {
             // Handle login error
             console.error('Login failed:', error);
@@ -41,7 +43,7 @@ const Login = ({ onLoginSuccess}) => {
         <Container>
             <Row className="justify-content-center">
                 <Col md="6">
-                    <h2 style = {{marginTop: "100px"}}>Concordia Travel login</h2>
+                    <h2 style={{ marginTop: "100px" }}>Concordia Travel login</h2>
                     <Form>
                         <FormGroup>
                             <Label for="username">Username</Label>
@@ -51,9 +53,13 @@ const Login = ({ onLoginSuccess}) => {
                             <Label for="password">Password</Label>
                             <Input type="password" name="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </FormGroup>
-                        <Button color="primary" onClick={handleLogin}>Login</Button>
+                        <div style={{ textAlign: 'center' }}>
+                            <Button color="primary" onClick={handleLogin}>Login</Button>
+                        </div>                        
                     </Form>
-                    <Link to="/register">Don't have an account? Register</Link>
+                    <div style={{ textAlign: 'center' }}>
+                        <Link to="/register">Don't have an account? Register</Link>
+                    </div>
                 </Col>
             </Row>
         </Container>
