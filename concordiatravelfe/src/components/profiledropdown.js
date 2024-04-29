@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import axios from 'axios';
@@ -13,13 +13,13 @@ const ProfileDropdown = ({ openProfile, setOpenProfile, setIsAuthenticated }) =>
     const handleLogout = async () => {
         try {
             const token = localStorage.getItem('token');
-            console.log("token",token);
-            const response = await axios.post(`${base_url}/logout/`,{},{
+            console.log("token", token);
+            const response = await axios.post(`${base_url}/logout/`, {}, {
                 headers: {
                     'Authorization': `Token ${token}`
                 }
             })
-            
+
 
             if (response.status === 200 && response.data.message === 'Logged out successfully') {
                 console.log('Logout successful:', response.data);
@@ -36,6 +36,8 @@ const ProfileDropdown = ({ openProfile, setOpenProfile, setIsAuthenticated }) =>
         }
     };
 
+    
+
     return (
         <Dropdown isOpen={openProfile} toggle={toggleDropdown}>
             <DropdownToggle nav caret={false}>
@@ -44,8 +46,8 @@ const ProfileDropdown = ({ openProfile, setOpenProfile, setIsAuthenticated }) =>
                 <DropdownItem>
                     Profile
                 </DropdownItem>
-                <DropdownItem>
-                    Notifications
+                <DropdownItem onClick={() => navigate('/mybookings')}>
+                    My bookings
                 </DropdownItem>
                 <DropdownItem onClick={handleLogout}>
                     Logout
