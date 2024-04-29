@@ -1,57 +1,81 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import axios from 'axios';
+import { Form, FormGroup, Label, Input, Button, Container, Row, Col } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
+import base_url from "../api/bootapi";
 
 const Register = () => {
-    const [formData, setFormData] = useState({
-       username: '',
-       password: '',
-       confirmPassword: '',
-       email: '',
-       user_type: 'CUSTOMER',
-    });
-   
-    const handleChange = (e) => {
-       setFormData({ ...formData, [e.target.name]: e.target.value });
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [userType, setUserType] = useState('CUSTOMER');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
+
+    const handleRegister = async (e) => {
+        e.preventDefault();
+        if (password !== confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+
+        try {
+            const response = await axios.post(`${base_url}/register/`, {
+                username,
+                email,
+                user_type: userType,
+                password
+            });
+
+            if (response.status === 201) {
+                console.log('Registration successful:', response.data);
+                // Optionally, navigate to a success page or login page
+                navigate('/login');
+            } else {
+                console.error('Registration failed:', response.data);
+            }
+        } catch (error) {
+            console.error('Registration failed:', error);
+        }
     };
-   
-    const handleSubmit = (e) => {
-       e.preventDefault();
-       if (formData.password !== formData.confirmPassword) {
-         alert('Passwords do not match');
-         return;
-       }
-       // Call your registerUser function here with formData
-       console.log(formData);
-    };
-   
+
     return (
-       <Container className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-         <Row>
-           <Col md="6">
-             <h2>Register</h2>
-             <Form onSubmit={handleSubmit}>
-               <FormGroup>
-                 <Label for="username">Username</Label>
-                 <Input type="text" name="username" id="username" placeholder="Username" value={formData.username} onChange={handleChange} />
-               </FormGroup>
-               <FormGroup>
-                 <Label for="email">Email</Label>
-                 <Input type="email" name="email" id="email" placeholder="Email" value={formData.email} onChange={handleChange} />
-               </FormGroup>
-               <FormGroup>
-                 <Label for="password">Password</Label>
-                 <Input type="password" name="password" id="password" placeholder="Password" value={formData.password} onChange={handleChange} />
-               </FormGroup>
-               <FormGroup>
-                 <Label for="confirmPassword">Confirm Password</Label>
-                 <Input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} />
-               </FormGroup>
-               <Button color="primary" type="submit">Register</Button>
-             </Form>
-           </Col>
-         </Row>
-       </Container>
+        <Container>
+            <Row className="justify-content-center">
+                <Col md="6">
+                    <h2 style={{ marginTop: "40px" }}>Concordia Travel Register</h2>
+                    <Form onSubmit={handleRegister}>
+                        <FormGroup>
+                            <Label for="username">Username</Label>
+                            <Input type="text" name="username" id="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="email">Email</Label>
+                            <Input type="email" name="email" id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="userType">User Type</Label>
+                            <Input type="select" name="userType" id="userType" value={userType} onChange={(e) => setUserType(e.target.value)}>
+                                <option value="CUSTOMER">Customer</option>
+                                <option value="AGENT">Agent</option>
+                            </Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="password">Password</Label>
+                            <Input type="password" name="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="confirmPassword">Confirm Password</Label>
+                            <Input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                        </FormGroup>
+                        <div style={{ textAlign: 'center' }}>
+                            <Button color="primary" type="submit">Register</Button>
+                        </div>
+                    </Form>
+                </Col>
+            </Row>
+        </Container>
     );
-   };
-   
-   export default Register;
+};
+
+export default Register;
