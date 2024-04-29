@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import PackageSearchBar from './components/packageSearchbar';
 import Nnavbar from './components/navbar';
 import FlightSearch from './components/flightSearch';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import FlightSearchContent from './components/flightSearchContent';
 import HotelSearch from './components/hotelSearch';
 import HotelSearchContent from './components/hotelSearchContent';
@@ -20,8 +20,24 @@ import BookingSuccessPage from './components/bookingSuccessPage';
 import MainBookingComponent from './components/myBookingsPage';
 import Register from './components/register';
 import AgentHome from './components/agentHome';
+import CreatePackage from './components/createPackage';
+import PackageCreationSuccessPage from './components/pacakgeCreationSuccessPage';
 
 function App() {
+
+  // const [bookingType, SetBookingtype] = useState("");
+
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    if(query.get("success")) {
+      <BookingSuccessPage/>
+      console.log("Order placed! You will receive an email confirmation.");
+    }
+    if(query.get("canceled")) {
+      // SetBookingtype("package");
+      console.log("Order canceled -- continue to shop around and checkout when you're ready.");
+    }
+  } , []);
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -31,6 +47,11 @@ function App() {
 
   return (
     <div>
+      {/* {bookingType ? (
+        <BookingSuccessPage bookingType={bookingType} />
+      ) : (
+        <></>
+      )} */}
       <Router>
         <Routes>
           <Route path="/" element={<Login onLoginSuccess={handleLoginSuccess} />} />
@@ -57,6 +78,8 @@ function App() {
                 <Route path="/mybookings" Component={MainBookingComponent} />
                 <Route path="/register" Component={Register} />
                 <Route path="/agenthome" Component={AgentHome} />
+                <Route path="/create-package" Component={CreatePackage} />
+                <Route path="/packageCreationSuccessPage" Component={PackageCreationSuccessPage} />
               </Routes>
             </div>
             <div>
