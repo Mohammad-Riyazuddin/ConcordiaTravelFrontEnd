@@ -27,6 +27,7 @@ const PackageDetails = () => {
 
     const handleBookNow = () => {
         const bookingInfo = {
+            name : packageDetails.name,
             package_id : packageDetails.id,
             hotel : packageDetails.hotel? packageDetails.hotel.name : 'No hotel in this package',
             flight : packageDetails.flight? packageDetails.flight.airlines + ' from ' + packageDetails.flight.departure_city + ' to ' + packageDetails.flight.destination_city : 'No flight in this package',

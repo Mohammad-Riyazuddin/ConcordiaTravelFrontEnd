@@ -21,6 +21,7 @@ import MainBookingComponent from './components/myBookingsPage';
 import Register from './components/register';
 import AgentHome from './components/agentHome';
 import CreatePackage from './components/createPackage';
+import Payments from './components/payments';
 import PackageCreationSuccessPage from './components/pacakgeCreationSuccessPage';
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
                 <Route path="/register" Component={Register} />
                 <Route path="/agenthome" Component={AgentHome} />
                 <Route path="/create-package" Component={CreatePackage} />
+                <Route path="/payments" Component={Payments} />
                 <Route path="/packageCreationSuccessPage" Component={PackageCreationSuccessPage} />
               </Routes>
             </div>

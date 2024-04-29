@@ -2,9 +2,9 @@ import React from "react";
 import { Alert } from "reactstrap";
 import { useLocation } from "react-router-dom";
 
-const BookingSuccessPage = () => {
+const BookingSuccessPage = ({bookingType}) => {
     const location = useLocation();
-    const bookingType = location.state?.bookingType;
+    // const bookingType = location.state?.bookingType;
 
 
     console.log('The bookingType is ' + bookingType);

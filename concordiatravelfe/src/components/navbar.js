@@ -13,7 +13,7 @@ import ProfileDropdown from "../components/profiledropdown";
 
 const Nnavbar = ({ setIsAuthenticated }) => {
     const [openProfile, setOpenProfile] = React.useState(false);
-
+    const isStaff = localStorage.getItem('isStaff') === 'true';
     const toggleDropdown = () => setOpenProfile(!openProfile);
 
     return (
@@ -25,22 +25,22 @@ const Nnavbar = ({ setIsAuthenticated }) => {
                         <Row>
                             <Col>
                                 <NavItem className="nav-item" >
-                                    <Link className="nav-link nav-link-active" style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bold' }} to="/CustomerHome">Home</Link>
+                                    <Link className="nav-link nav-link-active" style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bold' }} to={isStaff ? "/create-package" : "/CustomerHome"}>Home</Link>
                                 </NavItem>
                             </Col>
                             <Col>
                                 <NavItem className="nav-item">
-                                    <Link className="nav-link nav-link-active" style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bold' }} to="/Flights">Flights</Link>
+                                    <Link className="nav-link nav-link-active" style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bold' }} to={isStaff ? "/create-package" : "/Flights"}>Flights</Link>
                                 </NavItem>
                             </Col>
                             <Col>
                                 <NavItem className="nav-item">
-                                    <Link className="nav-link nav-link-active" style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bold' }} to="/Hotels">Hotels</Link>
+                                    <Link className="nav-link nav-link-active" style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bold' }} to={isStaff ? "/create-package" : "/Hotels"}>Hotels</Link>
                                 </NavItem>
                             </Col>
                             <Col>
                                 <NavItem className="nav-item">
-                                    <Link className="nav-link nav-link-active" style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bold' }} to="/Activities">Activities</Link>
+                                    <Link className="nav-link nav-link-active" style={{ textDecoration: 'none', color: 'blue', fontWeight: 'bold' }} to={isStaff ? "/create-package" : "/Activities"}>Activities</Link>
                                 </NavItem>
                             </Col>
                         </Row>

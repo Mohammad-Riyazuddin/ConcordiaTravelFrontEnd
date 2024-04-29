@@ -24,6 +24,7 @@ const Register = () => {
                 username,
                 email,
                 user_type: userType,
+                is_staff: userType === 'agent',
                 password
             });
 
@@ -56,8 +57,8 @@ const Register = () => {
                         <FormGroup>
                             <Label for="userType">User Type</Label>
                             <Input type="select" name="userType" id="userType" value={userType} onChange={(e) => setUserType(e.target.value)}>
-                                <option value="CUSTOMER">Customer</option>
-                                <option value="AGENT">Agent</option>
+                                <option value="customer">Customer</option>
+                                <option value="agent">Agent</option>
                             </Input>
                         </FormGroup>
                         <FormGroup>
